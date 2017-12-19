@@ -1,0 +1,44 @@
+.ChannelPicker {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  background: #ffffff;
+  box-sizing: border-box;
+  padding: 2em;
+  padding-bottom: 60px;
+
+  .channel-list {
+    max-height: 100%;
+    overflow: auto;
+
+    .channel {
+      float: left;
+      width: 200px;
+      max-width: 100%;
+      box-sizing: border-box;
+      padding: 0.5em;
+      border: 1px solid #f1f1f1;
+      border-radius: 3px;
+      margin: 0.5em;
+      cursor: pointer;
+      color: #5d5d5d;
+
+      .fa-check {
+        color: #d6d6d6;
+      }
+
+      &.active {
+        background: black;
+        color: #d4d4d4;
+        .fa-check {
+          color: #389414;
+        }
+      }
+    }
+
+    .channel:hover {
+      border-color: #d6d6d6;
+    }
+  }
+}

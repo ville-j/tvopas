@@ -1,0 +1,14 @@
+.ToolBar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #f1f1f1;
+  z-index: 10; }
+  .ToolBar a, .ToolBar a:link, .ToolBar a:visited {
+    color: #9c9c9c;
+    text-decoration: none;
+    padding: 1em;
+    display: inline-block; }
+  .ToolBar a:hover {
+    color: black; }

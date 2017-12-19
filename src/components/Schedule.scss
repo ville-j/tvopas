@@ -1,0 +1,31 @@
+.Schedule {
+  overflow: hidden;
+  width: percentage(1/5);
+  float: left;
+  padding: 1em;
+  box-sizing: border-box;
+  ol {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    li {
+      padding: 2px;
+    }
+  }
+  time {
+    width: 40px;
+    display: inline-block;
+  }
+  @media all and (max-width: 1400px) {
+    width: percentage(1/4);
+  }
+  @media all and (max-width: 1100px) {
+    width: percentage(1/3);
+  }
+  @media all and (max-width: 800px) {
+    width: percentage(1/2);
+  }
+  @media all and (max-width: 500px) {
+    width: percentage(1);
+  }
+}
