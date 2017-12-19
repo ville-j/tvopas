@@ -21,7 +21,7 @@ class Schedule extends Component {
   }
 
   async updateSchedule() {
-    const data = await (await fetch(API.schedule + this.props.channel)).json()
+    const data = await (await fetch(API.schedule + encodeURIComponent(this.props.channel))).json()
     this.setState({
       schedule: data.programs
     })
