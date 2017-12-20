@@ -25,6 +25,11 @@ class App extends Component {
         }
         <ToolBar openChannelPicker={() => this.toggleChannelPicker()} />
         <ChannelPicker channels={this.state.channels} userChannels={this.state.userChannels} addRemoveChannel={(e) => this.addRemoveChannel(e)} ref={(cp) => { this.channelPicker = cp }} />
+
+        {
+          this.state.userChannels.length < 1 &&
+          (<div className="start-notification"><div className="tail"></div>Start by picking your channels here</div>)
+        }
       </div>
     )
   }

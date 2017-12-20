@@ -17,7 +17,7 @@ class ChannelPicker extends Component {
           {
             this.props.channels.map((channel) => {
               const cssClass = "channel" + (this.props.userChannels.indexOf(channel) > -1 ? " active" : "")
-              return <div key={channel} onClick={(e) => this.addRemoveChannel(channel, e)} className={cssClass}><i className="fas fa-check"></i> {channel}</div>
+              return <button key={channel} onClick={(e) => this.addRemoveChannel(channel, e)} onKeyPress={(e) => this.addRemoveChannel(channel, e)} className={cssClass}><i className="fas fa-check"></i> {channel}</button>
             })
           }
         </div>

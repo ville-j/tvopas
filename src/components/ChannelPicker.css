@@ -20,7 +20,9 @@
       border-radius: 3px;
       margin: 0.5em;
       cursor: pointer;
-      color: #5d5d5d; }
+      color: #5d5d5d;
+      text-align: left;
+      background: transparent; }
       .ChannelPicker .channel-list .channel .fa-check {
         color: #d6d6d6; }
       .ChannelPicker .channel-list .channel.active {

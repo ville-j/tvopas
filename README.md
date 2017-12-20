@@ -1,5 +1,5 @@
 ## What is this?
-A simple tv guide for finnish tv channels.
+A simple tv guide for finnish tv channels. See live example in [https://janka.la/tv/](https://janka.la/tv/).
 
 ## How to run the project?
 - clone the repo
