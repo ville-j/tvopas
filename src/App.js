@@ -15,6 +15,7 @@ class App extends Component {
     }
     this.updateChannels()
   }
+
   render() {
     return (
       <div className="App">
