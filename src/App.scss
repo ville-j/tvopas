@@ -22,7 +22,31 @@
         }
     }
 
-    .selective-clear:nth-child(5n) {
-        clear: both;
+    .selective-clear {
+        @media all and (min-width: 1401px) {
+            &:nth-child(10n) {
+                clear: both;
+            }
+        }
+        @media all and (max-width: 1400px) {
+            &:nth-child(8n) {
+                clear: both;
+            }
+        }
+        @media all and (max-width: 1100px) {
+            &:nth-child(6n) {
+                clear: both;
+            }
+        }
+        @media all and (max-width: 800px) {
+            &:nth-child(4n) {
+                clear: both;
+            }
+        }
+        @media all and (max-width: 500px) {
+            clear: both;
+        }
     }
+
+    
 }
