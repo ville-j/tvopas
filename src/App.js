@@ -21,11 +21,13 @@ class App extends Component {
       <div className="App">
         {
           this.state.userChannels.map((channel) => {
-            return <Schedule key={channel} channel={channel} />
+            return [
+              <Schedule key={ channel } channel={ channel } />,
+              <div className="selective-clear"></div> ]
           })
         }
-        <ToolBar openChannelPicker={() => this.toggleChannelPicker()} />
-        <ChannelPicker channels={this.state.channels} userChannels={this.state.userChannels} addRemoveChannel={(e) => this.addRemoveChannel(e)} ref={(cp) => { this.channelPicker = cp }} />
+        <ToolBar openChannelPicker={ () => this.toggleChannelPicker() } />
+        <ChannelPicker channels={ this.state.channels } userChannels={ this.state.userChannels } addRemoveChannel={ (e) => this.addRemoveChannel(e) } ref={ (cp) => { this.channelPicker = cp } } />
 
         {
           this.state.userChannels.length < 1 &&

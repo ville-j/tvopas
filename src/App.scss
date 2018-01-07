@@ -21,4 +21,8 @@
             bottom: -15px;
         }
     }
+
+    .selective-clear:nth-child(5n) {
+        clear: both;
+    }
 }
