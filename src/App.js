@@ -17,13 +17,14 @@ class App extends Component {
   }
 
   render() {
+    let i = 0;
     return (
       <div className="App">
         {
           this.state.userChannels.map((channel) => {
             return [
               <Schedule key={ channel } channel={ channel } />,
-              <div className="selective-clear"></div> ]
+              <div key={ i++ } className="selective-clear"></div> ]
           })
         }
         <ToolBar openChannelPicker={ () => this.toggleChannelPicker() } />
