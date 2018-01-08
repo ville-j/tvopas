@@ -17,7 +17,7 @@ class App extends Component {
   }
 
   render() {
-    let i = 0;
+    let i = 0
     return (
       <div className="App">
         {
