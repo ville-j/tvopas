@@ -30,13 +30,15 @@ class App extends Component {
     return (
       <div className="App">
         <ProgramInfo programId={this.state.programId} attachElement={this.state.attachProgramInfoElement} />
-        {
-          this.state.userChannels.map((channel) => {
-            return [
-              <Schedule displayProgramInfo={this.displayProgramInfo} key={channel} channel={channel} />,
-              <div key={i++} className="selective-clear"></div>]
-          })
-        }
+        <div>
+          {
+            this.state.userChannels.map((channel) => {
+              return [
+                <Schedule displayProgramInfo={this.displayProgramInfo} key={channel} channel={channel} />,
+                <div key={i++} className="selective-clear"></div>]
+            })
+          }
+        </div>
         <ToolBar openChannelPicker={() => this.toggleChannelPicker()} />
         <ChannelPicker channels={this.state.channels} userChannels={this.state.userChannels} addRemoveChannel={(e) => this.addRemoveChannel(e)} ref={(cp) => { this.channelPicker = cp }} />
 
