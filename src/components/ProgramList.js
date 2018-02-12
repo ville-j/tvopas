@@ -23,8 +23,10 @@ class ProgramList extends Component {
             return (
               <li key={item.id}>
                 <div className="program-title-row">
-                  <time>{item.simple_start_time}</time>
-                  {decodeURIComponent(item.name)}
+                  <a role="button" tabIndex="0" onClick={(e) => this.props.displayProgramInfo(item.id, e)} onKeyUp={(e) => this.props.displayProgramInfo(item.id, e)}>
+                    <time>{item.simple_start_time}</time>
+                    {decodeURIComponent(item.name)}
+                  </a>
                 </div>
                 {now >= startTime &&
                   now < endTime && (

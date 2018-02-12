@@ -14,8 +14,8 @@ class Schedule extends Component {
   render() {
     return (
       <div className="Schedule">
-        <h3>{ this.props.channel }</h3>
-        <ProgramList data={ this.state.schedule } showMax={ 10 } updateData={ () => this.updateSchedule() } />
+        <h3>{this.props.channel}</h3>
+        <ProgramList displayProgramInfo={this.props.displayProgramInfo} data={this.state.schedule} showMax={10} updateData={() => this.updateSchedule()} />
       </div>
     )
   }

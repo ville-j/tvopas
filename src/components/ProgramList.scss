@@ -1,8 +1,17 @@
 .ProgramList {
   .program-title-row {
-    text-overflow: ellipsis;
     white-space: nowrap;
     max-width: 100%;
-    overflow: hidden;
+    a {
+      display: block;
+      cursor: pointer;
+      max-width: 100%;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+    a:focus {
+      outline: 0;
+      background: #eaeaea;
+    }
   }
 }
