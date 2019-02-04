@@ -1,0 +1,74 @@
+.ChannelCard {
+  width: 20%;
+  float: left;
+  padding: 10px;
+  height: 360px;
+  overflow: hidden;
+  margin-bottom: 15px;
+}
+
+@media all and (max-width: 1200px) {
+  .ChannelCard {
+    width: 25%;
+  }
+}
+
+@media all and (max-width: 1000px) {
+  .ChannelCard {
+    width: 33%;
+  }
+}
+
+@media all and (max-width: 720px) {
+  .ChannelCard {
+    width: 50%;
+  }
+}
+
+@media all and (max-width: 500px) {
+  .ChannelCard {
+    width: 100%;
+  }
+}
+
+.ChannelCard h4 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.ChannelCard-program {
+  line-height: 22px;
+  letter-spacing: 0.4px;
+}
+
+.ChannelCard-program-title {
+  cursor: pointer;
+}
+
+.ChannelCard-program-title:hover,
+.ChannelCard-program-title.expanded {
+  color: #fff;
+}
+
+.ChannelCard-program > div > div {
+  display: inline;
+}
+
+.ChannelCard-program time {
+  display: inline;
+  margin-right: 5px;
+  opacity: 0.7;
+}
+
+.ChannelCard-program-description {
+  position: absolute;
+  background: #131313;
+  z-index: 10;
+  left: 0;
+  padding: 10px;
+  width: 100%;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 13px;
+}

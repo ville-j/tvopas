@@ -1,14 +1,23 @@
 {
   "name": "tvopas",
-  "version": "0.1.0",
-  "private": true,
+  "version": "2.0.0",
+  "private": false,
   "dependencies": {
+    "axios": "^0.18.0",
+    "feather-icons": "^4.16.0",
+    "http-proxy": "^1.17.0",
+    "mobx": "^5.9.0",
+    "mobx-react": "^5.4.3",
+    "mobx-state-tree": "^3.10.2",
+    "moment": "^2.24.0",
     "react": "^16.7.0",
+    "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^16.7.0",
     "react-scripts": "2.1.3"
   },
   "scripts": {
     "start": "react-scripts start",
+    "start-proxy": "node proxy/index.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
