@@ -22,7 +22,7 @@ export const SideBar = inject("store")(
               setTimeout(() => {
                 document.activeElement !== searchInput &&
                   store.setSidebarVisibility(false);
-              }, 100);
+              }, 250);
             }}
             onFocus={() => {
               store.setSidebarVisibility(true);
