@@ -48,6 +48,9 @@ const ChannelCard = observer(props => {
             )}
             {props.store.expandedProgram === p.id && (
               <div className="ChannelCard-program-description">
+                <div className="ChannelCard-program-description-title">
+                  {p.name}
+                </div>
                 {p.description}
               </div>
             )}

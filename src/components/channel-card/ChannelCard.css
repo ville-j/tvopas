@@ -3,7 +3,6 @@
   float: left;
   padding: 10px;
   height: 400px;
-  overflow: hidden;
 }
 
 @media all and (max-width: 1200px) {
@@ -39,12 +38,14 @@
 
 .ChannelCard-program {
   letter-spacing: 0.4px;
+  position: relative;
 }
 
 .ChannelCard-program-title {
   cursor: pointer;
   padding: 4px 0;
   white-space: nowrap;
+  overflow: hidden;
 }
 
 .ChannelCard-program-title:hover,
@@ -70,12 +71,16 @@
   padding: 10px;
   width: 100%;
   color: rgba(255, 255, 255, 0.7);
-  font-size: 13px;
+}
+
+.ChannelCard-program-description-title {
+  font-weight: 600;
+  margin-bottom: 10px;
 }
 
 .ProgressBar {
   background: rgba(0, 0, 0, 0.3);
-  margin-top: 2px;
+  margin-top: 3px 0;
   display: block;
 }
 
