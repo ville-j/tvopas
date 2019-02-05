@@ -3,12 +3,21 @@ import { observer, inject } from "mobx-react";
 import moment from "moment";
 import "./ChannelCard.css";
 
+const ProgressBar = ({ percentage }) => {
+  return (
+    <div className="ProgressBar">
+      <div style={{ width: `${percentage}%` }} />
+    </div>
+  );
+};
+
 const ChannelCard = observer(props => {
   return (
     <div className="ChannelCard">
       <h4>{props.data.name}</h4>
+
       {props.data.schedule
-        .filter(s => s.endTime > Date.now())
+        .filter(s => s.endTime > props.store.now)
         .slice(0, 15)
         .map((p, i) => (
           <div className="ChannelCard-program" key={p.id}>
@@ -28,6 +37,15 @@ const ChannelCard = observer(props => {
               </time>
               <div>{p.name}</div>
             </div>
+            {p.startTime < props.store.now && (
+              <ProgressBar
+                percentage={
+                  ((props.store.now - p.startTime) /
+                    (p.endTime - p.startTime)) *
+                  100
+                }
+              />
+            )}
             {props.store.expandedProgram === p.id && (
               <div className="ChannelCard-program-description">
                 {p.description}

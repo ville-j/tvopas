@@ -19,7 +19,8 @@ const UIStore = types
 export const AppStore = types
   .model("AppStore", {
     channelStore: types.optional(ChannelStore, { channels: {} }),
-    uiStore: types.optional(UIStore, {})
+    uiStore: types.optional(UIStore, {}),
+    now: types.optional(types.number, Date.now())
   })
   .views(self => ({
     get API() {
@@ -40,20 +41,32 @@ export const AppStore = types
       return self.uiStore.showSidebar;
     }
   }))
-  .actions(self => ({
-    afterCreate() {
-      self.channelStore.loadChannels();
-    },
-    saveChannel(channelId) {
-      self.channelStore.saveChannel(channelId);
-    },
-    removeChannel(channelId) {
-      self.channelStore.removeChannel(channelId);
-    },
-    expandProgram(programId) {
-      self.uiStore.expandProgram(programId);
-    },
-    setSidebarVisibility(visible) {
-      return self.uiStore.setSidebarVisibility(visible);
-    }
-  }));
+  .actions(self => {
+    let interval = null;
+    return {
+      afterCreate() {
+        self.channelStore.loadChannels();
+        interval = setInterval(() => {
+          self.updateNow(Date.now());
+        }, 5000);
+      },
+      beforeDestroy() {
+        clearInterval(interval);
+      },
+      saveChannel(channelId) {
+        self.channelStore.saveChannel(channelId);
+      },
+      removeChannel(channelId) {
+        self.channelStore.removeChannel(channelId);
+      },
+      expandProgram(programId) {
+        self.uiStore.expandProgram(programId);
+      },
+      setSidebarVisibility(visible) {
+        return self.uiStore.setSidebarVisibility(visible);
+      },
+      updateNow(time) {
+        self.now = time;
+      }
+    };
+  });

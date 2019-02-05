@@ -2,9 +2,8 @@
   width: 20%;
   float: left;
   padding: 10px;
-  height: 360px;
+  height: 400px;
   overflow: hidden;
-  margin-bottom: 15px;
 }
 
 @media all and (max-width: 1200px) {
@@ -39,12 +38,13 @@
 }
 
 .ChannelCard-program {
-  line-height: 22px;
   letter-spacing: 0.4px;
 }
 
 .ChannelCard-program-title {
   cursor: pointer;
+  padding: 4px 0;
+  white-space: nowrap;
 }
 
 .ChannelCard-program-title:hover,
@@ -52,7 +52,7 @@
   color: #fff;
 }
 
-.ChannelCard-program > div > div {
+.ChannelCard-program > .ChannelCard-program-title > div {
   display: inline;
 }
 
@@ -71,4 +71,16 @@
   width: 100%;
   color: rgba(255, 255, 255, 0.7);
   font-size: 13px;
+}
+
+.ProgressBar {
+  background: rgba(0, 0, 0, 0.3);
+  margin-top: 2px;
+  display: block;
+}
+
+.ProgressBar div {
+  background: #b70660;
+  height: 3px;
+  display: block;
 }
