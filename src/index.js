@@ -8,7 +8,7 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
 const API = axios.create({
-  baseURL: "http://192.168.1.5:5050/rest/"
+  baseURL: process.env.REACT_APP_API_URL
 });
 
 const store = AppStore.create(
