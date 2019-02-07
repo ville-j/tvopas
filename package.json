@@ -2,6 +2,9 @@
   "name": "tvopas",
   "version": "2.0.0",
   "private": false,
+  "homepage": "https://janka.la/tv",
+  "author": "Ville Jänkälä",
+  "license": "MIT",
   "dependencies": {
     "axios": "^0.18.0",
     "feather-icons": "^4.16.0",
