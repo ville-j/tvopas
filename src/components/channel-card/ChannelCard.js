@@ -1,15 +1,15 @@
-import React from "react";
-import { observer, inject } from "mobx-react";
-import moment from "moment";
-import "./ChannelCard.css";
+import React from 'react'
+import { observer, inject } from 'mobx-react'
+import moment from 'moment'
+import './ChannelCard.css'
 
 const ProgressBar = ({ percentage }) => {
   return (
     <div className="ProgressBar">
       <div style={{ width: `${percentage}%` }} />
     </div>
-  );
-};
+  )
+}
 
 const ChannelCard = observer(props => {
   return (
@@ -23,17 +23,17 @@ const ChannelCard = observer(props => {
           <div className="ChannelCard-program" key={p.id}>
             <div
               className={
-                "ChannelCard-program-title" +
-                (props.store.expandedProgram === p.id ? " expanded" : "")
+                'ChannelCard-program-title' +
+                (props.store.expandedProgram === p.id ? ' expanded' : '')
               }
               onClick={() => {
                 props.store.expandProgram(
                   props.store.expandedProgram === p.id ? null : p.id
-                );
+                )
               }}
             >
               <time dateTime={moment(p.startTime).format()}>
-                {moment(p.startTime).format("HH:mm")}
+                {moment(p.startTime).format('HH:mm')}
               </time>
               <div>{p.name}</div>
             </div>
@@ -57,7 +57,7 @@ const ChannelCard = observer(props => {
           </div>
         ))}
     </div>
-  );
-});
+  )
+})
 
-export default inject("store")(ChannelCard);
+export default inject('store')(ChannelCard)

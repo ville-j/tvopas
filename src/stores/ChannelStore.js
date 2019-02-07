@@ -1,67 +1,65 @@
-import { values } from "mobx";
+import { values } from 'mobx'
 import {
   types,
   getParent,
   onPatch,
   applySnapshot,
-  getSnapshot
-} from "mobx-state-tree";
+  getSnapshot,
+} from 'mobx-state-tree'
 
 const Channel = types
-  .model("Channel", {
+  .model('Channel', {
     name: types.string,
     id: types.identifier,
-    programs: types.optional(types.array(types.frozen()), [])
+    programs: types.optional(types.array(types.frozen()), []),
   })
   .views(self => ({
     get saved() {
-      return (
-        getParent(self, 2).savedChannels.findIndex(c => c === self.id) > -1
-      );
+      return getParent(self, 2).savedChannels.findIndex(c => c === self.id) > -1
     },
     get schedule() {
-      const data = getParent(self, 2).schedules.get(self.id);
-      return data ? values(data.programs) : [];
-    }
-  }));
+      const data = getParent(self, 2).schedules.get(self.id)
+      return data ? values(data.programs) : []
+    },
+  }))
 
-const Schedule = types.model("Schedule", {
+const Schedule = types.model('Schedule', {
   channelId: types.identifier,
-  programs: types.optional(types.array(types.frozen()), [])
-});
+  programs: types.optional(types.array(types.frozen()), []),
+})
 
 export const ChannelStore = types
-  .model("ChannelStore", {
+  .model('ChannelStore', {
     channels: types.map(Channel),
     savedChannels: types.optional(types.array(types.string), []),
-    schedules: types.map(Schedule)
+    schedules: types.map(Schedule),
   })
   .views(self => ({
     get app() {
-      return getParent(self);
-    }
+      return getParent(self)
+    },
   }))
   .actions(self => ({
     afterCreate() {
       onPatch(self.savedChannels, patch => {
-        patch.op === "add" && self.loadSchedule(patch.value);
+        patch.op === 'add' && self.loadSchedule(patch.value)
         localStorage.setItem(
-          "savedChannels",
+          'savedChannels',
           JSON.stringify(getSnapshot(self.savedChannels))
-        );
-      });
+        )
+      })
       try {
-        const savedChannels = localStorage.getItem("savedChannels");
+        const savedChannels = localStorage.getItem('savedChannels')
         if (savedChannels)
-          applySnapshot(self.savedChannels, JSON.parse(savedChannels));
+          applySnapshot(self.savedChannels, JSON.parse(savedChannels))
       } catch (e) {
-        console.warn(e);
+        console.warn(e)
       }
     },
     loadChannels() {
-      self.app.API.get("livechannels/?deviceType=WEB").then(res => {
-        self.setChannels(res.data.liveChannels);
-      });
+      self.app.API.get('livechannels/?deviceType=WEB').then(res => {
+        self.setChannels(res.data.liveChannels)
+      })
     },
     loadSchedule(channelId) {
       self.app.API.get(
@@ -74,35 +72,35 @@ export const ChannelStore = types
           name: p.name,
           startTime: p.startTime,
           endTime: p.endTime,
-          description: p.longdescription
-        }));
+          description: p.longdescription,
+        }))
 
-        self.setSchedule(channelId, programs);
-      });
+        self.setSchedule(channelId, programs)
+      })
     },
     setSchedule(channelId, programs) {
       self.schedules.put({
         channelId: channelId,
-        programs: programs
-      });
+        programs: programs,
+      })
     },
     setChannels(channelData) {
       channelData.map(c =>
         self.channels.put({
           name: c.name,
-          id: `${c.id}`
+          id: `${c.id}`,
         })
-      );
+      )
     },
     saveChannel(channelId) {
       if (self.savedChannels.findIndex(c => c === channelId) > -1)
-        throw Error("Can't save channel, channel already saved");
+        throw Error("Can't save channel, channel already saved")
 
-      self.savedChannels.push(channelId);
+      self.savedChannels.push(channelId)
     },
     removeChannel(channelId) {
-      const index = self.savedChannels.findIndex(c => c === channelId);
-      if (index < 0) throw Error("Can't remove channel, channel not saved");
-      self.savedChannels.splice(index, 1);
-    }
-  }));
+      const index = self.savedChannels.findIndex(c => c === channelId)
+      if (index < 0) throw Error("Can't remove channel, channel not saved")
+      self.savedChannels.splice(index, 1)
+    },
+  }))

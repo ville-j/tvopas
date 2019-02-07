@@ -1,5 +1,5 @@
-import React from "react";
-import sprite from "feather-icons/dist/feather-sprite.svg";
+import React from 'react'
+import sprite from 'feather-icons/dist/feather-sprite.svg'
 export const Icon = ({ name }) => {
   return (
     <svg
@@ -14,5 +14,5 @@ export const Icon = ({ name }) => {
     >
       <use href={`${sprite}#${name}`} />
     </svg>
-  );
-};
+  )
+}
