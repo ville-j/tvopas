@@ -56,10 +56,19 @@
   stroke: #ff4200;
 }
 
-.SideBar-toggle .feather-icon {
+.SideBar-toggle > .feather-icon {
   position: absolute;
   left: 10px;
 }
+
+.SideBar-toggle span {
+  position: absolute;
+  left: 10px;
+  cursor: pointer;
+  padding-top: 5px;
+  display: inline-block;
+}
+
 .SideBar-search {
   display: block;
   height: 100%;

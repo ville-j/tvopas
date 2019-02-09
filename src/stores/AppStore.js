@@ -21,6 +21,7 @@ export const AppStore = types
     channelStore: types.optional(ChannelStore, { channels: {} }),
     uiStore: types.optional(UIStore, {}),
     now: types.optional(types.number, Date.now()),
+    channelFilter: types.optional(types.string, ''),
   })
   .views(self => ({
     get API() {
@@ -63,10 +64,13 @@ export const AppStore = types
         self.uiStore.expandProgram(programId)
       },
       setSidebarVisibility(visible) {
-        return self.uiStore.setSidebarVisibility(visible)
+        self.uiStore.setSidebarVisibility(visible)
       },
       updateNow(time) {
         self.now = time
+      },
+      setChannelFilter(filter) {
+        self.channelFilter = filter
       },
     }
   })

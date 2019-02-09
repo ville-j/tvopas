@@ -4,36 +4,45 @@ import { Scrollbars } from 'react-custom-scrollbars'
 import { Icon } from '../icon/Icon'
 import './SideBar.css'
 
-let searchInput
-
 export const SideBar = inject('store')(
   observer(({ store }) => {
     return (
       <div className={'SideBar' + (store.showSidebar ? ' expanded' : '')}>
         <div className="SideBar-toggle">
-          <Icon name="search" />
+          {!store.showSidebar && <Icon name="search" />}
           <input
             type="text"
             className="SideBar-search"
-            ref={el => {
-              searchInput = el
-            }}
-            onBlur={() => {
-              setTimeout(() => {
-                document.activeElement !== searchInput &&
-                  store.setSidebarVisibility(false)
-              }, 250)
-            }}
+            placeholder="Search channel"
+            value={store.channelFilter}
             onFocus={() => {
               store.setSidebarVisibility(true)
             }}
+            onChange={e => {
+              store.setChannelFilter(e.target.value)
+            }}
           />
+          {store.showSidebar && (
+            <span
+              onClick={() => {
+                store.setSidebarVisibility(false)
+                store.setChannelFilter('')
+              }}
+            >
+              <Icon name="x" />
+            </span>
+          )}
         </div>
 
         {store.showSidebar && (
           <div className="SideBar-content">
             <Scrollbars style={{ width: '100%', height: '100%' }}>
               {store.channels
+                .filter(c =>
+                  c.name
+                    .toLowerCase()
+                    .includes(store.channelFilter.toLowerCase())
+                )
                 .sort((a, b) => {
                   return ('' + a.name).localeCompare(b.name)
                 })
@@ -44,7 +53,6 @@ export const SideBar = inject('store')(
                       'SideBar-content-item' + (c.saved ? ' saved-channel' : '')
                     }
                     onClick={() => {
-                      searchInput.focus()
                       store.savedChannels.findIndex(sc => sc.id === c.id) < 0
                         ? store.saveChannel(c.id)
                         : store.removeChannel(c.id)
