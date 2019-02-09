@@ -29,9 +29,11 @@ export const AppStore = types
   .model('AppStore', {
     channelStore: types.optional(ChannelStore, { channels: {} }),
     uiStore: types.optional(UIStore, {}),
-    now: types.optional(types.number, Date.now()),
     channelFilter: types.optional(types.string, ''),
   })
+  .volatile(self => ({
+    now: types.optional(types.number, Date.now()),
+  }))
   .views(self => ({
     get API() {
       return getEnv(self).API
@@ -56,6 +58,7 @@ export const AppStore = types
     return {
       afterCreate() {
         self.channelStore.loadChannels()
+        self.updateNow(Date.now())
         interval = setInterval(() => {
           self.updateNow(Date.now())
         }, 5000)
