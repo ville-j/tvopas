@@ -1,18 +1,20 @@
 import { values } from 'mobx'
-import {
-  types,
-  getParent,
-  onPatch,
-  applySnapshot,
-  getSnapshot,
-} from 'mobx-state-tree'
+import { types, getParent, onPatch } from 'mobx-state-tree'
+import { randomColor } from '../utils'
 
 const Channel = types
   .model('Channel', {
     name: types.string,
     id: types.identifier,
-    programs: types.optional(types.array(types.frozen()), []),
   })
+  .actions(self => ({
+    setColor(color) {
+      getParent(self, 3).uiStore.addColor({
+        channelId: self.id,
+        color: color,
+      })
+    },
+  }))
   .views(self => ({
     get saved() {
       return getParent(self, 2).savedChannels.findIndex(c => c === self.id) > -1
@@ -20,6 +22,10 @@ const Channel = types
     get schedule() {
       const data = getParent(self, 2).schedules.get(self.id)
       return data ? values(data.programs) : []
+    },
+    get color() {
+      const item = getParent(self, 3).uiStore.colors.get(self.id)
+      return item ? item.color : null
     },
   }))
 
@@ -42,19 +48,14 @@ export const ChannelStore = types
   .actions(self => ({
     afterCreate() {
       onPatch(self.savedChannels, patch => {
-        patch.op === 'add' && self.loadSchedule(patch.value)
-        localStorage.setItem(
-          'savedChannels',
-          JSON.stringify(getSnapshot(self.savedChannels))
-        )
+        if (patch.op === 'add') {
+          self.loadSchedule(patch.value)
+          setTimeout(() => {
+            const channel = self.channels.get(patch.value)
+            channel.color === null && channel.setColor(randomColor())
+          }, 100)
+        }
       })
-      try {
-        const savedChannels = localStorage.getItem('savedChannels')
-        if (savedChannels)
-          applySnapshot(self.savedChannels, JSON.parse(savedChannels))
-      } catch (e) {
-        console.warn(e)
-      }
     },
     loadChannels() {
       self.app.API.get('livechannels/?deviceType=WEB').then(res => {

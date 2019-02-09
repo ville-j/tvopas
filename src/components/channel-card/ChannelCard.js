@@ -13,7 +13,12 @@ const ProgressBar = ({ percentage }) => {
 
 const ChannelCard = observer(props => {
   return (
-    <div className="ChannelCard">
+    <div
+      className="ChannelCard"
+      style={{
+        backgroundColor: props.data.color,
+      }}
+    >
       <h4>{props.data.name}</h4>
 
       {props.data.schedule

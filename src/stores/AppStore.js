@@ -2,10 +2,16 @@ import { values } from 'mobx'
 import { types, getEnv } from 'mobx-state-tree'
 import { ChannelStore } from './ChannelStore'
 
+const Color = types.model('Color', {
+  channelId: types.identifier,
+  color: types.string,
+})
+
 const UIStore = types
   .model('UIStore', {
     expandedProgram: types.maybeNull(types.number, null),
     showSidebar: types.optional(types.boolean, false),
+    colors: types.map(Color),
   })
   .actions(self => ({
     expandProgram(programId) {
@@ -13,6 +19,9 @@ const UIStore = types
     },
     setSidebarVisibility(visible) {
       self.showSidebar = visible
+    },
+    addColor(color) {
+      self.colors.put(color)
     },
   }))
 

@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'mobx-react'
 import axios from 'axios'
+import { onSnapshot, applySnapshot } from 'mobx-state-tree'
 import { AppStore } from './stores/AppStore'
 import './index.css'
 import App from './App'
@@ -17,6 +18,15 @@ const store = AppStore.create(
     API: API,
   }
 )
+
+const snapshot = localStorage.getItem('state')
+if (snapshot) {
+  applySnapshot(store, JSON.parse(snapshot))
+}
+
+onSnapshot(store, snapshot => {
+  localStorage.setItem('state', JSON.stringify(snapshot))
+})
 
 ReactDOM.render(
   <Provider store={store}>
